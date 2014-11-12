@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Newsletter registration status</title>
+</head>
+<body>
+<h1>Newsletter registration status</h1>
+
+<p th:if="${registered}" th:object="${registered}" th:inline="text">
+    You have been successfully registered as "[[*{firstName}]] [[*{lastName}]]" &lt;[[*{email}]]&gt;.
+</p>
+
+<div th:unless="${subscribers.iterator().hasNext()}">
+    <h2>No registered users</h2>
+</div>
+<div th:if="${subscribers.iterator().hasNext()}">
+    <h2>All registered users</h2>
+    <table>
+        <tr><th>#</th><th>First Name</th><th>Last Name</th><th>E-mail</th></tr>
+        <tr th:each="subscriber : ${subscribers}" th:object="${subscriber}">
+            <td th:text="*{id}">0</td>
+            <td th:text="*{firstName}">Pepa</td>
+            <td th:text="*{lastName}">Zdepa</td>
+            <td th:text="*{email}">pepa@zdepa</td>
+        </tr>
+    </table>
+</div>
+<p>Back to <a href="#" th:href="@{/}">index</a>.</p>
+</body>
+</html>
